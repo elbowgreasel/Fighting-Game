@@ -26,3 +26,10 @@ ArrowRight: Right
 ArrowDown: Attack
 
 I plan on adding some animations/graphics.
+
+
+CREDITS:
+
+Chris Courses made a video that I am following to build this game: https://youtu.be/vyqbNFMDRGQ
+
+Assets from https://brullov.itch.io/oak-woods  // https://twitter.com/brullov_art
