@@ -31,15 +31,17 @@ const shop = new Sprite({
 })
 const player = new Fighter({
     position: {
-        x: 0,
+        x: 50,
         y: 0
     },
+    width: 65,
+    height: 100,
     velocity: {
         x: 0,
         y: 0
     },
     offset: {
-        x: 5,
+        x: 0,
         y: 0
     },
     imageSrc: './Assets/samuraiMack/Idle.png',
@@ -47,7 +49,7 @@ const player = new Fighter({
     scale: 2.5,
     offset: {
         x: 215,
-        y: 297
+        y: 205
     },
     sprites: {
         idle: {
@@ -74,7 +76,7 @@ const player = new Fighter({
     attackBox: {
         offset: {
             x: 100,
-            y: -130
+            y: -40
         },
         width: 125,
         height: 140
@@ -83,16 +85,18 @@ const player = new Fighter({
 
 const enemy = new Fighter({
     position: {
-        x: 50,
-        y: 100
+        x: 900,
+        y: 0
     },
+    width: 70,
+    height: 100,
     velocity: {
         x: 0,
         y: 0
     },
     color: "blue",
     offset: {
-        x: -20,
+        x: 0,
         y: 0
     },
     imageSrc: './Assets/kenji/Idle.png',
@@ -100,7 +104,7 @@ const enemy = new Fighter({
     scale: 2.5,
     offset: {
         x: 215,
-        y: 311
+        y: 220
     },
     sprites: {
         idle: {
@@ -126,10 +130,10 @@ const enemy = new Fighter({
     },
     attackBox: {
         offset: {
-            x: -160,
-            y: -130
+            x: -172,
+            y: -40
         },
-        width: 125,
+        width: 145,
         height: 140
     }
 })

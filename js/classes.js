@@ -49,6 +49,8 @@ class Sprite {
 class Fighter extends Sprite {
     constructor({
         position,
+        width,
+        height,
         velocity,
         color = 'red', 
         imageSrc, scale = 1, 
@@ -67,8 +69,8 @@ class Fighter extends Sprite {
         })
 
         this.velocity = velocity
-        this.width = 5
-        this.height = 10
+        this.width = width
+        this.height = height
         this.lastKey
         this.attackBox = {
             position: {
@@ -102,20 +104,22 @@ class Fighter extends Sprite {
         this.attackBox.position.y = this.position.y + this.velocity.y + this.attackBox.offset.y
 
         // draw the attack box
-        // context.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height)
-
+        //context.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height)
 
         this.position.x += this.velocity.x
         this.position.y += this.velocity.y
 
+        //gravity
         if(this.position.y + this.height + this.velocity.y >= canvas.height - 96) {
             this.velocity.y = 0
-            this.position.y = 470.25
+            this.position.y = 380
         }
         else {
             this.velocity.y += gravity
         }
-        console.log(this.position.y)
+
+        //draw hitbox
+        //context.fillRect(this.position.x, this.position.y, this.width, this.height)
     }
 
     attack() {
