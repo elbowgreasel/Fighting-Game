@@ -86,6 +86,35 @@ const enemy = new Fighter({
     offset: {
         x: -20,
         y: 0
+    },
+    imageSrc: './Assets/kenji/Idle.png',
+    framesMax: 4,
+    scale: 2.5,
+    offset: {
+        x: 215,
+        y: 311
+    },
+    sprites: {
+        idle: {
+            imageSrc: './Assets/kenji/Idle.png',
+            framesMax: 4
+        },
+        run: {
+            imageSrc: './Assets/kenji/Run.png',
+            framesMax: 8
+        },
+        jump: {
+            imageSrc: './Assets/kenji/Jump.png',
+            framesMax: 2
+        },
+        fall: {
+            imageSrc: './Assets/kenji/Fall.png',
+            framesMax: 2
+        },
+        attack1: {
+            imageSrc: './Assets/kenji/Attack1.png',
+            framesMax: 4
+        }
     }
 })
 
@@ -118,11 +147,11 @@ function animate() {
     background.update()
     shop.update()
     player.update()
-    // enemy.update()
+    enemy.update()
 
     player.velocity.x = 0
     enemy.velocity.x = 0
-    //player movement
+    // player movement
 
     if(keys.a.pressed && player.lastKey === 'a') {
         player.velocity.x = -5
@@ -136,7 +165,7 @@ function animate() {
         player.switchSprite('idle')
     }
 
-    // jumping
+    // player jumping
     if(player.velocity.y < 0) {
         player.switchSprite('jump')
     }
@@ -144,12 +173,25 @@ function animate() {
         player.switchSprite('fall')
     }
 
-    //enemy movement
+    // enemy movement
     if(keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft') {
-        enemy.velocity.x = -1
+        enemy.velocity.x = -5
+        enemy.switchSprite('run')
     }
     else if(keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight') {
-        enemy.velocity.x = 1
+        enemy.velocity.x = 5
+        enemy.switchSprite('run')
+    }
+    else{
+        enemy.switchSprite('idle')
+    }
+
+    // enemy jumping
+    if(enemy.velocity.y < 0) {
+        enemy.switchSprite('jump')
+    }
+    else if(enemy.velocity.y > 0) {
+        enemy.switchSprite('fall')
     }
 
     // detect for collision for player
@@ -198,7 +240,7 @@ window.addEventListener('keydown', (event) => {
             enemy.lastKey = 'ArrowLeft'
             break
         case 'ArrowUp':
-            enemy.velocity.y = -5
+            enemy.velocity.y = -15
             break
         case 'ArrowDown': 
             enemy.attack()
