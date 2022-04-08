@@ -70,6 +70,14 @@ const player = new Fighter({
             imageSrc: './Assets/samuraiMack/Attack1.png',
             framesMax: 6
         }
+    },
+    attackBox: {
+        offset: {
+            x: 100,
+            y: -130
+        },
+        width: 125,
+        height: 140
     }
 })
 
@@ -115,6 +123,14 @@ const enemy = new Fighter({
             imageSrc: './Assets/kenji/Attack1.png',
             framesMax: 4
         }
+    },
+    attackBox: {
+        offset: {
+            x: -160,
+            y: -130
+        },
+        width: 125,
+        height: 140
     }
 })
 
@@ -195,18 +211,31 @@ function animate() {
     }
 
     // detect for collision for player
-    if(rectangularCollision({ rectangle1: player, rectangle2: enemy}) && player.isAttacking) {
+    if(rectangularCollision({ rectangle1: player, rectangle2: enemy}) && player.isAttacking && player.framesCurrent === 4) {
         player.isAttacking = false
-        enemy.health -= 20;
+        enemy.health -= 35;
         document.querySelector('#enemy-health').style.background = `linear-gradient(to right, rgba(0, 0, 255, 0.6) ${enemy.health}%, rgba(255, 255, 255, 0.5) ${enemy.health}%`;
     }
 
+    //if player misses
+    if(player.isAttacking && player.framesCurrent === 4){
+        player.isAttacking = false
+    }
+
     // detect for collion for enemy
-    if(rectangularCollision({ rectangle1: enemy, rectangle2: player}) && enemy.isAttacking) {
+    if(rectangularCollision({ rectangle1: enemy, rectangle2: player}) && enemy.isAttacking && enemy.framesCurrent === 2) {
         enemy.isAttacking = false
         player.health -= 20;
         document.querySelector('#player-health').style.background = `linear-gradient(to left, rgba(255, 0, 0, 0.6) ${player.health}%, rgba(255, 255, 255, 0.5) ${player.health}%`;
-}
+
+    }
+
+    //if enemy misses
+    if(enemy.isAttacking && enemy.framesCurrent === 2){
+        enemy.isAttacking = false
+    }
+
+    //if player or enemy health is 0 or less game over.
     if(enemy.health <= 0 || player.health <= 0){
         determineWinner({player, enemy, timerId})
     }
