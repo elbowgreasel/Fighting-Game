@@ -42,12 +42,34 @@ const player = new Fighter({
         x: 5,
         y: 0
     },
-    imageSrc: './Assets/samuraiMack/idle.png',
+    imageSrc: './Assets/samuraiMack/Idle.png',
     framesMax: 8,
     scale: 2.5,
     offset: {
         x: 215,
         y: 297
+    },
+    sprites: {
+        idle: {
+            imageSrc: './Assets/samuraiMack/Idle.png',
+            framesMax: 8
+        },
+        run: {
+            imageSrc: './Assets/samuraiMack/Run.png',
+            framesMax: 8
+        },
+        jump: {
+            imageSrc: './Assets/samuraiMack/Jump.png',
+            framesMax: 2
+        },
+        fall: {
+            imageSrc: './Assets/samuraiMack/Fall.png',
+            framesMax: 2
+        },
+        attack1: {
+            imageSrc: './Assets/samuraiMack/Attack1.png',
+            framesMax: 6
+        }
     }
 })
 
@@ -100,13 +122,26 @@ function animate() {
 
     player.velocity.x = 0
     enemy.velocity.x = 0
-    
     //player movement
+
     if(keys.a.pressed && player.lastKey === 'a') {
-        player.velocity.x = -1
+        player.velocity.x = -5
+        player.switchSprite('run')
     }
     else if(keys.d.pressed && player.lastKey === 'd') {
-        player.velocity.x = 1
+        player.velocity.x = 5
+        player.switchSprite('run')
+    }
+    else{
+        player.switchSprite('idle')
+    }
+
+    // jumping
+    if(player.velocity.y < 0) {
+        player.switchSprite('jump')
+    }
+    else if(player.velocity.y > 0) {
+        player.switchSprite('fall')
     }
 
     //enemy movement
@@ -147,7 +182,7 @@ window.addEventListener('keydown', (event) => {
             player.lastKey = 'a'
             break
         case 'w':
-            player.velocity.y = -5
+            player.velocity.y = -15
             break
         case " ":
             player.attack()
