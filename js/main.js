@@ -71,6 +71,14 @@ const player = new Fighter({
         attack1: {
             imageSrc: './Assets/samuraiMack/Attack1.png',
             framesMax: 6
+        },
+        takeHit: {
+            imageSrc: './Assets/samuraiMack/Take Hit - white silhouette.png',
+            framesMax: 4
+        },
+        death: {
+            imageSrc: './Assets/samuraiMack/Death.png',
+            framesMax: 6
         }
     },
     attackBox: {
@@ -126,6 +134,14 @@ const enemy = new Fighter({
         attack1: {
             imageSrc: './Assets/kenji/Attack1.png',
             framesMax: 4
+        },
+        takeHit: {
+            imageSrc: './Assets/kenji/Take hit.png',
+            framesMax: 3
+        },
+        death: {
+            imageSrc: './Assets/kenji/Death.png',
+            framesMax: 7
         }
     },
     attackBox: {
@@ -159,13 +175,15 @@ function animate() {
     window.requestAnimationFrame(animate)
     context.fillStyle = 'black'
     context.fillRect(
-        0, 
-        0, 
-        canvas.width, 
+        0,
+        0,
+        canvas.width,
         canvas.height
         )
     background.update()
     shop.update()
+    context.fillStyle = 'rgba(255, 255, 255, 0.15)'
+    context.fillRect(0, 0, canvas.width, canvas.height)
     player.update()
     enemy.update()
 
@@ -214,10 +232,10 @@ function animate() {
         enemy.switchSprite('fall')
     }
 
-    // detect for collision for player
+    // detect for collision for player & enemy gets hit
     if(rectangularCollision({ rectangle1: player, rectangle2: enemy}) && player.isAttacking && player.framesCurrent === 4) {
+        enemy.takeHit()
         player.isAttacking = false
-        enemy.health -= 35;
         document.querySelector('#enemy-health').style.background = `linear-gradient(to right, rgba(0, 0, 255, 0.6) ${enemy.health}%, rgba(255, 255, 255, 0.5) ${enemy.health}%`;
     }
 
@@ -226,10 +244,10 @@ function animate() {
         player.isAttacking = false
     }
 
-    // detect for collion for enemy
+    // detect for collion for enemy & player gets hit
     if(rectangularCollision({ rectangle1: enemy, rectangle2: player}) && enemy.isAttacking && enemy.framesCurrent === 2) {
+        player.takeHit()
         enemy.isAttacking = false
-        player.health -= 20;
         document.querySelector('#player-health').style.background = `linear-gradient(to left, rgba(255, 0, 0, 0.6) ${player.health}%, rgba(255, 255, 255, 0.5) ${player.health}%`;
 
     }
@@ -246,24 +264,29 @@ function animate() {
 }
 
 window.addEventListener('keydown', (event) => {
-    switch (event.key) {
-        //player listeners
-        case 'd':
-            keys.d.pressed = true
-            player.lastKey = 'd'
-            break
-        case 'a':
-            keys.a.pressed = true
-            player.lastKey = 'a'
-            break
-        case 'w':
-            player.velocity.y = -15
-            break
-        case " ":
-            player.attack()
-            break
-
-        //enemy listeners
+    if(!player.dead){
+        switch (event.key) {
+            //player listeners
+            case 'd':
+                keys.d.pressed = true
+                player.lastKey = 'd'
+                break
+            case 'a':
+                keys.a.pressed = true
+                player.lastKey = 'a'
+                break
+            case 'w':
+                player.velocity.y = -15
+                break
+            case " ":
+                player.attack()
+                break
+        }
+    }
+    
+    if(!enemy.dead){
+        switch (event.key) {
+            //enemy listeners
         case 'ArrowRight':
             keys.ArrowRight.pressed = true
             enemy.lastKey = 'ArrowRight'
@@ -278,8 +301,9 @@ window.addEventListener('keydown', (event) => {
         case 'ArrowDown': 
             enemy.attack()
             break
+        }
     }
-    console.log(event.key)
+    
 })
 
 window.addEventListener('keyup', (event) => {
