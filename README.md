@@ -1,35 +1,48 @@
 # Fighting-Game
-fighting game I am working on.
-
-The video I am working from: https://www.youtube.com/watch?v=vyqbNFMDRGQ
 
 Currently allows inputs from two players.
 
-Player:
+- Player:
 
-W: Jump
+   W: Jump
 
-A: Move Left
+   A: Move Left
 
-D: Move Right
+   D: Move Right
 
-SpaceBar: Attack
+   SpaceBar: Attack
 
-Enemy:
+- Enemy:
 
-ArrowUp: Jump
+   ArrowUp: Jump
 
-ArrowLeft: Left
+   ArrowLeft: Left
 
-ArrowRight: Right
+   ArrowRight: Right
 
-ArrowDown: Attack
+   ArrowDown: Attack
+   
 
-I plan on adding some animations/graphics.
+## _CREDITS_
 
+### Big thank you to [Chris Courses](https://chriscourses.com) who made a video that I am following to build this game.
 
-CREDITS:
+- _Chris Courses_
+   
+   Fighting Game tutorial video: https://youtu.be/vyqbNFMDRGQ
+   
+   Twitter: https://twitter.com/chriscourses
 
-Chris Courses made a video that I am following to build this game: https://youtu.be/vyqbNFMDRGQ
+#### Assets from 
 
-Assets from https://brullov.itch.io/oak-woods  // https://twitter.com/brullov_art
+- _Brullov_
+
+   Asset: https://brullov.itch.io/oak-woods 
+
+   Social: https://twitter.com/brullov_art
+
+- _LuizMelo_
+
+   Asset: https://luizmelo.itch.io/martial-hero / https://luizmelo.itch.io/martial-hero-2
+   
+   Social: https://twitter.com/LuizGdeMelo
