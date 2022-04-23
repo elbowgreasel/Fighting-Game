@@ -2,30 +2,30 @@
 
 Currently allows inputs from two players.
 
-- Player:
+#### - Player:
 
-   W: Jump
+      W - Jump
 
-   A: Move Left
+      A - Move Left
 
-   D: Move Right
+      D - Move Right
 
-   SpaceBar: Attack
+      SpaceBar - Attack
 
-- Enemy:
+#### - Enemy:
 
-   ArrowUp: Jump
+      ArrowUp - Jump
 
-   ArrowLeft: Left
+      ArrowLeft - Left
 
-   ArrowRight: Right
+      ArrowRight - Right
 
-   ArrowDown: Attack
+      ArrowDown - Attack
    
 
 ## _CREDITS_
 
-### Big thank you to [Chris Courses](https://chriscourses.com) who made a video that I am following to build this game.
+### Big thank you to [Chris Courses](https://chriscourses.com) who made the video that I am following to build this game.
 
 - _Chris Courses_
    
